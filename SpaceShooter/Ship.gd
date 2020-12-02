@@ -1,12 +1,15 @@
 """
 Ship.gd
 
-Extends Area2D, contains, var SPEED, const BULLET, _process(), fire_bullet(),
-func _on_Ship_area_entered().
+Extends Area2D, contains, var SPEED, const EXPLOSIONEFFECT const BULLET, 
+_process(), fire_bullet(), func _on_Ship_area_entered(), func _exit_tree().
 
 This controls the ship movement, which goes up and down.
 """
 extends Area2D
+
+# Variable to get the explosion animation. 
+const EXPLOSIONEFFECT = preload("res://ExplosionEffect.tscn")
 
 # This const gives access to bullet.tscn.
 const BULLET = preload("res://Bullet.tscn")
@@ -55,3 +58,17 @@ It destroys the foreign Areas2D and also the ship.
 func _on_Ship_area_entered(area: Area2D) -> void:
 	area.queue_free()
 	queue_free()
+	
+	
+"""
+func _exit_tree()
+
+When the enemy is about to leave the scene. Get the name of the current scene,
+world.tscn, var = the explosion animation, add the explosion as a child to the
+main scene, the position of the explosion is the same of the enemy.
+"""
+func _exit_tree() -> void:
+	var main = get_tree().current_scene
+	var explosionEffect = EXPLOSIONEFFECT.instance()
+	main.add_child(explosionEffect)
+	explosionEffect.global_position = global_position
