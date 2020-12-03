@@ -1,9 +1,5 @@
 """
-Enemy.gd
-
-Extends Area 2D, contains var SPEED, ARMOR, const ExplosionEffect, signal score_up
-_process(), func _on_Enemy_body_entered(), func _ready()
-func _on_VisibilityNotifier2D_screen_exited(), func _exit_tree().
+ENEMY.GD
 
 It controls the movement of the enemy and the collisions. When the enemy leaves
 the screen the notifier activates and removes the enemy from the main scene.
@@ -32,7 +28,7 @@ const EXPLOSIONEFFECT = preload("res://ExplosionEffect.tscn")
 
 
 """
-func _ready()
+FUNC _READY()
 
 Gets access to the main scene, world.
 Connects the signal score_up to the main scene, create _on_Enemy_score_up()
@@ -54,7 +50,7 @@ world.gd with setget set_score.
 
 
 """
-func _process()
+FUNC _PROCESS
 
 Controls the movement of the enemy that will move towards the ship.
 """
@@ -63,7 +59,7 @@ func _process(delta: float) -> void:
 
 
 """
-func _on_Enemy_body_entered()
+FUNC _ON_ENEMY_BODY_ENTERED()
 
 Signal. When the bullet, the body, collides with the enemy this one loses 1 
 armor and the bullet is destroyed. If the enemy loses 3 points it is also 
@@ -71,22 +67,22 @@ destroyed. Emit signal score_up if killed.
 
 We comment the signal and the connect and just update the score directly on
 world.gd with setget set_score.
+
+When the laser enters in collision it plays the hit sound.
 """
 func _on_Enemy_body_entered(body: Node) -> void:
+	body.create_hit_effect()
 	body.queue_free()
 	ARMOR -= 1
 	if ARMOR <= 0:
 		# emit_signal("score_up")
-		
-		var main = get_tree().current_scene
-		if main.is_in_group("World"):
-		# connect("score_up", main, "_on_Enemy_score_up")
-			main.score += 10
+		add_to_score()
+		_create_explosion()
 		queue_free()
 
 
 """
-func _on_VisibilityNotifier2D_screen_exited()
+FUNC _ON_VISIBILITYNOTIFIER2D_SCREEN_EXITED()
 
 Signal. When the enemy exits the screen it is removed.
 """
@@ -95,17 +91,26 @@ func _on_VisibilityNotifier2D_screen_exited() -> void:
 
 
 """
-func _exit_tree()
+FUNC _CREATE_EXPLOSION()
 
 When the enemy is about to leave the scene. Get the name of the current scene,
 world.tscn, var = the explosion animation, add the explosion as a child to the
 main scene, the position of the explosion is the same of the enemy.
 """
-func _exit_tree() -> void:
+func _create_explosion() -> void:
 	var main = get_tree().current_scene
 	var explosionEffect = EXPLOSIONEFFECT.instance()
 	main.add_child(explosionEffect)
 	explosionEffect.global_position = global_position
 	
 	
-	
+"""
+FUNC ADD_TO_SCORE()
+
+Function to add the score.
+"""
+func add_to_score():
+	var main = get_tree().current_scene
+	if main.is_in_group("World"):
+	# connect("score_up", main, "_on_Enemy_score_up")
+		main.score += 10

@@ -1,8 +1,5 @@
 """
-EnemySpawner.gd
-
-Extends Node 2d, contains const ENEMY, onready var spawnPoints, 
-func get_spawn_point(), func spawn_enemy(), func _on_Timer_timeout().
+ENEMYSPAWNER.GD
 
 The EnemySpawner2D node is attached to the World scene. Once we play the game
 the timer attached to EnemySpawner reaches its end after 2 seconds and 
@@ -30,7 +27,8 @@ onready var spawnPoints : Node2D = $SpawnPoints
 
 
 """
-func _on_Timer_timeout()
+FUNC _ON_TIMER_TIMEOUT()
+
 Signal on timer. 
 
 When timer runs out runs the code.
@@ -41,8 +39,7 @@ func _on_Timer_timeout() -> void:
 	
 	
 """
-func spawn_enemy()
-Used in _on_Timer_timeout()
+FUNC SPAWN_ENEMY()
 
 Var spawn_position gets a random position2D from SpawnPoints thanks to 
 get_spawn_position().
@@ -65,8 +62,7 @@ func spawn_enemy():
 
 
 """
-func get_spawn_point()
-Used in func spawn_enemy().
+FUNC GET_SPAWN_POINT()
 
 Get a spawn point from the list of SpawnPoints.
 
