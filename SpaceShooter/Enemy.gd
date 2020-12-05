@@ -6,7 +6,6 @@ the screen the notifier activates and removes the enemy from the main scene.
 When enemy is removed from the world scene it plays the animation explosion.
 If the enemy is killed by the player 10 points will be add thanks to
 func _ready().
-
 We comment the signal and the connect and just update the score directly on
 world.gd with setget set_score.
 """
@@ -33,12 +32,10 @@ FUNC _READY()
 Gets access to the main scene, world.
 Connects the signal score_up to the main scene, create _on_Enemy_score_up()
 only if we are in the main node if this one is a world node.
-
 On node world, on groups add the World group. The function _on_Enemy_score_up 
 should be added to the world.gd. If it is confirmed that the scene is the
 world, connect will be true and func _on_Enemy_score_up will play up on
 world.gd.
-
 We comment the signal and the connect and just update the score directly on
 world.gd with setget set_score.
 """
@@ -64,10 +61,8 @@ FUNC _ON_ENEMY_BODY_ENTERED()
 Signal. When the bullet, the body, collides with the enemy this one loses 1 
 armor and the bullet is destroyed. If the enemy loses 3 points it is also 
 destroyed. Emit signal score_up if killed.
-
 We comment the signal and the connect and just update the score directly on
 world.gd with setget set_score.
-
 When the laser enters in collision it plays the hit sound.
 """
 func _on_Enemy_body_entered(body: Node) -> void:

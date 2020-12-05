@@ -5,6 +5,7 @@ This controls the ship movement, which goes up and down.
 Fires the laser.
 Destroys the ship and the enemy if they collide with each other.
 Play they explosing animation when leaving the tree scene.
+When the player dies go to gameover scene thanks to signal playerDeath.
 """
 extends Area2D
 
@@ -16,6 +17,9 @@ const LASER = preload("res://Laser.tscn")
 
 # Variable to be used in _process() for movement.
 export(int) var SPEED = 100
+
+# Signal for when player dies.
+signal playerDeath
 
 
 """
@@ -37,9 +41,7 @@ func _process(delta: float) -> void:
 FUNC _FIRE_LASER()
 
 Gets the bullet.tsnc with var bullet, gets the World node (root) with main.
-
 With these two var declared it adds the bullet as child in the World node. 
-
 Sets the bullet position to the position of the ship.
 """
 func fire_laser():
@@ -66,9 +68,11 @@ FUNC _EXIT_TREE()
 When the ship is about to leave the scene. Get the name of the current scene,
 world.tscn, var = the explosion animation, add the explosion as a child to the
 main scene, the position of the explosion is the same of the ship.
+When player player dies, emit signal playerDeath.
 """
 func _exit_tree() -> void:
 	var main = get_tree().current_scene
 	var explosionEffect = EXPLOSIONEFFECT.instance()
 	main.add_child(explosionEffect)
 	explosionEffect.global_position = global_position
+	emit_signal("playerDeath")
