@@ -26,7 +26,8 @@ signal playerDeath
 FUNC _PROCESS()
 
 Receives input from player, move ship up and down holding the key.
-Fires the bullets just pressing the key. 
+Fires the bullets just pressing the key.
+For testing purposes in comment input to destroy the ship. 
 """ 
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("ui_up"):
@@ -35,6 +36,8 @@ func _process(delta: float) -> void:
 		position.y += SPEED * delta
 	if Input.is_action_just_pressed("ui_accept"):
 		fire_laser()
+	#if Input.is_action_just_pressed("ui_cancel"):
+	#	queue_free()
 
 
 """
