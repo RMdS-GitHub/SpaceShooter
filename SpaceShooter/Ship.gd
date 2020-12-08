@@ -76,6 +76,6 @@ When player player dies, emit signal playerDeath.
 func _exit_tree() -> void:
 	var main = get_tree().current_scene
 	var explosionEffect = EXPLOSIONEFFECT.instance()
-	main.add_child(explosionEffect)
+	main.call_deferred("add_child", explosionEffect)
 	explosionEffect.global_position = global_position
 	emit_signal("playerDeath")

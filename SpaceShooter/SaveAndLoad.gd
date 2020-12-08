@@ -5,6 +5,8 @@ It is also a singleton. This script is used to save and load the highscore.
 Used in the world.gd  and gameOverScreen.gd script.
 The save_data.JSON file can be found in the project folder not sure if project 
 is exported.
+For testing purposes the save data path: res://save_data.json but for real 
+deployments user://save_data.json path.
 """
 extends Node
 

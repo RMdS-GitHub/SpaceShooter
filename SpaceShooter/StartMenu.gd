@@ -14,9 +14,10 @@ FUNC _PROCRESS()
 
 When input is ui_accept, start the game, when its ui_cancel, leave the game.
 """
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
-		get_tree().change_scene("res://World.tscn")
+		#Var to remove warning in debugger. Undescore not doing anything.
+		var _r = get_tree().change_scene("res://World.tscn")
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
 

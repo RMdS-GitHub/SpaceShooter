@@ -32,7 +32,8 @@ FUNC _PROCESS()
 
 When input is ui_accept, go the StartMenu scene.
 """
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
-		get_tree().change_scene("res://StartMenu.tscn")
+		#Var to remove warning in debugger. Undescore not doing anything.
+		var _r = get_tree().change_scene("res://StartMenu.tscn")
 

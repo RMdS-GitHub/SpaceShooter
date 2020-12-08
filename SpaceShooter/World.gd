@@ -70,7 +70,8 @@ Before changing scenes update_save_data to store or not the highscore.
 func _on_Ship_playerDeath() -> void:
 	update_save_data()
 	yield(get_tree().create_timer(1), "timeout")
-	get_tree().change_scene("res://GameOverScreen.tscn")
+	#Var to remove warning in debugger. Undescore not doing anything.
+	var _r = get_tree().change_scene("res://GameOverScreen.tscn")
 	
 	
 """
